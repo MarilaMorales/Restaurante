@@ -57,7 +57,4 @@ class Detalles_orden(models.Model):
     Cantidad = models.IntegerField()
     precio_unitario = models.IntegerField()
 
-    def __str__(self):
-        return f'{self.fecha} - {self.Menu} - {self.Usuario}'
-
 

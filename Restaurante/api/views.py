@@ -1,6 +1,7 @@
 from rest_framework import generics
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden
-
+from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
+from .serializers import OrdenSerializer, Detalles_ordenSerializer
 
 
 # Categoria
@@ -10,7 +11,7 @@ class CategoriaListCreate(generics.ListCreateAPIView):
 
 class CategoriaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categorias.objects.all()
-    serializer_class = CategoriaSerializer
+    serializer_class = CategoriaSerializer, 
     
     
     
