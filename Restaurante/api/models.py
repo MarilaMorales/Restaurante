@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Categorias(models.Model):
     Entrada = models.CharField(max_length=20)
     Postre = models.CharField(max_length=20)
@@ -57,3 +58,5 @@ class Detalles_orden(models.Model):
 
     def __str__(self):
         return f'{self.fecha} - {self.Menu} - {self.Usuario}'
+
+
