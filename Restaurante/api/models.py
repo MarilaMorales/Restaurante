@@ -9,7 +9,7 @@ class Categorias(models.Model):
     Plato_Fuerte = models.CharField(max_length=20)
     Bebida = models.CharField(max_length=20)
 
-    def _str_(self):
+    def __str__(self):
         return self.Entrada
     
 
@@ -18,7 +18,7 @@ class Administrador(models.Model):
     nombre_admin = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
  
-    def _str_(self):
+    def __str__(self):
         return self.nombre_admin
     
 
@@ -30,7 +30,7 @@ class Menu(models.Model):
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
 
  
-    def _str_(self):
+    def __str__(self):
         return self.nombre
     
 
@@ -39,7 +39,7 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=100)
     telefono = models.CharField(max_length=20)
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
 class Orden(models.Model):
@@ -47,7 +47,7 @@ class Orden(models.Model):
     estado = models.CharField(max_length=20)
     Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return f'{self.fecha} - {self.Usuario}'
 
 class Detalles_orden(models.Model):
@@ -56,5 +56,4 @@ class Detalles_orden(models.Model):
     Cantidad = models.IntegerField()
     precio_unitario = models.IntegerField()
 
-    def _str_(self):
-        return f'{self.fecha} - {self.Menu} - {self.Usuario}'
+
