@@ -79,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'restaurante',  # El nombre de tu base de datos en MySQL
-        'USER': 'marila',  # Tu usuario de MySQL
-        'PASSWORD': 'Paz12',  # La contraseña de tu usuario MySQL
-        'HOST': '192.168.100.116',  # Si estás ejecutando MySQL localmente
+        'USER': 'jenfer',  # Tu usuario de MySQL
+        'PASSWORD': '091821Jdelm.',  # La contraseña de tu usuario MySQL
+        'HOST': '127.0.0.1',  # Si estás ejecutando MySQL localmente
         'PORT': '3306',  # El puerto por defecto de MySQL
     }
 }
