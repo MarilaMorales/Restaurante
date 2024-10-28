@@ -56,8 +56,6 @@ class Promociones(models.Model):
     def __str__(self):
         return self.Promocion
 
-
-
 class Administrador(models.Model):
     nombre_admin = models.CharField(max_length=50)
     apellido_admin = models.CharField(max_length=50)
