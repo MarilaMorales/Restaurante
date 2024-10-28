@@ -6,7 +6,7 @@ from django.db import models
 
 
 
-class Reseña(models.Model):
+class Resena(models.Model):
     mensaje_reseña = models.CharField(max_length=20)
 
     def _str_(self):
@@ -37,6 +37,7 @@ class Empleado(models.Model):
 
 
 class Producto(models.Model):
+    Ingrediente = models.CharField(max_length=100)
     stock = models.CharField(max_length=20)
     Proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
    
