@@ -14,11 +14,11 @@ urlpatterns = [
     path('empleado/', views.EmpleadoListCreate.as_view(), name='Empleado-list'),
     path('empleado/<int:pk>/', views.EmpleadoDetail.as_view(), name='Empleado-detail'),
     
-    path('producto/', views.ProveedorListCreate.as_view(), name='Proveedor-list'),
-    path('producto/<int:pk>/', views.ProveedorDetail.as_view(), name='Proveedor-detail'),
-    
     path('proveedor/', views.ProductoListCreate.as_view(), name='Producto-list'),
     path('proveedor/<int:pk>/', views.ProductoDetail.as_view(), name='Producto-detail'),
+    
+    path('producto/', views.ProveedorListCreate.as_view(), name='Proveedor-list'),
+    path('producto/<int:pk>/', views.ProveedorDetail.as_view(), name='Proveedor-detail'),
     
     path('promociones/', views.PromocionesListCreate.as_view(), name='Promociones-list'),
     path('promociones/<int:pk>/', views.PromocionesDetail.as_view(), name='Promociones-detail'),
