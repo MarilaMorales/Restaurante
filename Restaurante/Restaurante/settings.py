@@ -83,7 +83,6 @@ DATABASES = {
         'PASSWORD': 'Paz12',  # La contraseña de tu usuario MySQL
         'HOST': '192.168.100.116',  # Si estás ejecutando MySQL localmente
         'PORT': '3306', # El puerto por defecto de MySQL
-
     }
 }
 
