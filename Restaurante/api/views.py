@@ -5,7 +5,7 @@ from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administra
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
 from .serializers import OrdenSerializer, Detalles_ordenSerializer, ResenaSerializer
 from .serializers import PagoSerializer, EmpleadoSerializer, ProductoSerializer, ProveedorSerializer, PromocionesSerializer
-from .serializers import AdministradorSerializer, DireccionSerializer, RestauranteSerializer, Menu_del_DiaSerializer
+from .serializers import AdministradorSerializer, DireccionSerializer, RestauranteSerializer, Menu_DiaSerializer
 
 
 # Reseña
@@ -24,14 +24,14 @@ class ResenaDetail(generics.RetrieveUpdateDestroyAPIView):
 
 # Especialidades
 
-class Menu_del_DiaListCreate(generics.ListCreateAPIView):
+class Menu_DiaListCreate(generics.ListCreateAPIView):
     queryset = Menu_Dia.objects.all()
-    serializer_class = Menu_del_DiaSerializer
+    serializer_class = Menu_DiaSerializer
  
 
-class Menu_Del_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
+class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu_Dia.objects.all()
-    serializer_class = Menu_del_DiaSerializer
+    serializer_class = Menu_DiaSerializer
 
     
     
@@ -186,12 +186,12 @@ class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
 class MenuListCreate(generics.ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticated]
+
 
 class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    permission_classes = [IsAuthenticated]
+ 
         
 
 # Detalles_Orden

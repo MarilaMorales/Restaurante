@@ -8,7 +8,7 @@ class ResenaSerializer(serializers.ModelSerializer):
         model = Resena
         fields = '__all__'
         
-class Menu_del_DiaSerializer(serializers.ModelSerializer):
+class Menu_DiaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu_Dia
         fields = '__all__'

@@ -78,11 +78,11 @@ class Direccion (models.Model):
 
 
 class Categorias(models.Model):
-    Categoria = models.CharField(max_length=50)
+    Categorias = models.CharField(max_length=50)
 
 
     def _str_(self):
-        return f'{self.Categoria}' 
+        return f'{self.Categorias}' 
     
 
 
