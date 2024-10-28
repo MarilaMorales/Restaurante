@@ -149,9 +149,7 @@ class OrdenListCreate(generics.ListCreateAPIView):
 class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
-    
-    
-
+ 
 
 # Menu
 
@@ -162,10 +160,8 @@ class MenuListCreate(generics.ListCreateAPIView):
 class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
-    
+        
 
-
-    
 # Detalles_Orden
 
 class Detalles_ordenListCreate(generics.ListCreateAPIView):

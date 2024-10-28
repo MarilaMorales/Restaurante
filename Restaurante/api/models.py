@@ -3,9 +3,6 @@ from django.db import models
 
 # Create your models here.
 
-
-
-
 class Resena(models.Model):
     mensaje_reseña = models.CharField(max_length=20)
 
@@ -35,22 +32,22 @@ class Empleado(models.Model):
     def _str_(self):
         return f'{self.Nombre_empleado} - {self.Codigo_empleado}'
 
-
-class Producto(models.Model):
-    Ingrediente = models.CharField(max_length=100)
-    stock = models.CharField(max_length=20)
-    Proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
-   
-    def _str_(self):
-        return f'{self.stock} - {self.Proveedor}'
-
-
 class Proveedor(models.Model):
     Nombre_Proveedor = models.CharField(max_length=20)
     Telefono = models.IntegerField()
-   
+    
     def _str_(self):
         return f'{self.Nombre_Proveedor} - {self.Telefono}'
+
+     
+class Producto(models.Model):
+    ingrediente = models.CharField(max_length=25)
+    stock = models.CharField(max_length=20)    
+    Proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
+   
+    def _str_(self):
+        return f'{self.stock} - {self.ingrediente}- {self.Proveedor}'
+
 
 
 class Promociones(models.Model):
@@ -92,10 +89,10 @@ class Categorias(models.Model):
 
 class Restaurante (models.Model):
     Direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE)
-    Reseña = models.ForeignKey('Reseña', on_delete=models.CASCADE)
+    Resena = models.ForeignKey('Reseña', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.Direccion} - {self.Reseña}'
+        return f'{self.Direccion} - {self.Resena}'
     
 
 class Usuario(models.Model):
@@ -144,7 +141,3 @@ class Detalles_orden(models.Model):
         
 
     
-
-
-
-
