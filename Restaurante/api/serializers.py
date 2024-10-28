@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Restaurante
 from .models import Resena, Especialidad, Pago, Empleado, Proveedor, Producto, Promociones,Direccion
@@ -32,7 +33,7 @@ class ProductoSerializer(serializers.ModelSerializer):
         model = Producto
         fields = '_all_'
 
-class PormocionesSerializer(serializers.ModelSerializer):
+class PromocionesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Promociones
         fields = '_all_'
@@ -91,7 +92,9 @@ class MenuSerializer(serializers.ModelSerializer):
         
 class Detalles_ordenSerializer(serializers.ModelSerializer):
     class Meta:
-
         model = Detalles_orden
         fields = '_all_'
+
+
+
 

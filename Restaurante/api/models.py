@@ -88,9 +88,10 @@ class Categorias(models.Model):
 class Restaurante (models.Model):
     Direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE)
     Resena = models.ForeignKey('Reseña', on_delete=models.CASCADE)
+    Administrador = models.ForeignKey('Administrador', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.Direccion} - {self.Resena}'
+        return f'{self.Direccion} - {self.Resena} - {self.Administrador}'
     
 
 class Usuario(models.Model):
@@ -102,17 +103,6 @@ class Usuario(models.Model):
         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
 
 
-class Orden(models.Model):
-    fecha = models.DateField()
-    estado = models.CharField(max_length=20)
-    Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-    Administrador = models.ForeignKey('Administrador', on_delete=models.CASCADE)
-    
-    def _str_(self):
-        return f'{self.fecha} - {self.estado} - {self.Usuario}'
-
-
-
 class Menu(models.Model):
     Plato = models.CharField(max_length=50)
     Descripcion = models.CharField(max_length=50)
@@ -122,24 +112,32 @@ class Menu(models.Model):
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
  
     def _str_(self):
-        return f'{self.Platolato} - {self.Descripcion} - {self.precio} - {self.Categorias}' 
+        return f'{self.Plato} - {self.Descripcion} - {self.precio} - {self.Promocion} - {self.Plato_Del_Dia} - {self.Categorias}' 
     
+
+
+
+class Orden(models.Model):
+    fecha = models.DateField()
+    estado = models.CharField(max_length=20)
+    Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    Empleado = models.ForeignKey('Empleado', on_delete=models.CASCADE)
+    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)
+    
+    def _str_(self):
+        return f'{self.fecha} - {self.estado} - {self.Usuario} - {self.Empleado} - {self.Menu}'
+
 
 
 class Detalles_orden(models.Model):
     Orden = models.ForeignKey('Orden', on_delete=models.CASCADE)
-    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)
     Pago = models.ForeignKey('Pago', on_delete=models.CASCADE)
-    Empleado = models.ForeignKey('Empleado', on_delete=models.CASCADE)
+    Restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE)
     Cantidad = models.IntegerField()
     Total = models.IntegerField()
 
     def _str_(self):
-        return f'{self.Orden} - {self.Menu} - {self.Cantidad} - {self.Total}'
+        return f'{self.Orden} - {self.Pago} - {self.Restaurante} - {self.Cantidad} - {self.Total} '
         
 
     
-
-
-
-
