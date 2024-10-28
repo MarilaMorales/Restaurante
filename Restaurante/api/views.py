@@ -62,9 +62,7 @@ class OrdenListCreate(generics.ListCreateAPIView):
 class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
-    
-    
-    
+      
 # Detalles_Orden
 
 class Detalles_ordenListCreate(generics.ListCreateAPIView):
