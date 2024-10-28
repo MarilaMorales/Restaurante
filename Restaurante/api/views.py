@@ -4,7 +4,7 @@ from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administra
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
 from .serializers import OrdenSerializer, Detalles_ordenSerializer, ResenaSerializer, EspecialidadSerializer
 from .serializers import PagoSerializer, EmpleadoSerializer, ProductoSerializer, ProveedorSerializer, PromocionesSerializer
-from .serializers import AdministradorSerializer, DireccionSerializer
+from .serializers import AdministradorSerializer, DireccionSerializer, RestauranteSerializer
 
 
 # Reseña
