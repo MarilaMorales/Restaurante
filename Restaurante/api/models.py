@@ -141,7 +141,3 @@ class Detalles_orden(models.Model):
         
 
     
-
-
-
-
