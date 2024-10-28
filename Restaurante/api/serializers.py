@@ -92,6 +92,7 @@ class MenuSerializer(serializers.ModelSerializer):
         
 class Detalles_ordenSerializer(serializers.ModelSerializer):
     class Meta:
-
+         model = Detalles_orden
+         fields = '_all_'
 
 
