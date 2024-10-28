@@ -23,8 +23,8 @@ urlpatterns = [
     path('promociones/', views.PromocionesListCreate.as_view(), name='Promociones-list'),
     path('promociones/<int:pk>/', views.PromocionesDetail.as_view(), name='Promociones-detail'),
     
-    path('administrador/', views.AdministradorListCreate.as_view(), name='reservas-list'),
-    path('administrador/<int:pk>/', views.AdministradorDetail.as_view(), name='reservas-detail'),
+    path('administrador/', views.AdministradorListCreate.as_view(), name='Administrador-list'),
+    path('administrador/<int:pk>/', views.AdministradorDetail.as_view(), name='Administrador-detail'),
     
     path('Direccion/', views.DireccionListCreate.as_view(), name='Direccion-list'),
     path('Direccion/<int:pk>/', views.DireccionDetail.as_view(), name='Direccion-detail'),
