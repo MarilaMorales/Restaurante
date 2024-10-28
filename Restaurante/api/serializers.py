@@ -25,7 +25,7 @@ class MenuSerializer(serializers.ModelSerializer):
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Menu
+        model = Usuario
         fields = '_all_'
         
     def validate_nombre(self, value):
@@ -35,10 +35,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
 class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Menu
+        model = Orden
         fields = '_all_'
         
 class Detalles_ordenSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Menu
+        model = Detalles_orden
         fields = '_all_'
