@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden
-from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
+from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden,Direccion,Restaurante
+from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer,DireccionSerializer,RestauranteSerializer
 from .serializers import OrdenSerializer, Detalles_ordenSerializer
 
 
@@ -70,5 +70,28 @@ class Detalles_ordenListCreate(generics.ListCreateAPIView):
     serializer_class = Detalles_ordenSerializer
 
 class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Orden.objects.all()
+    queryset = Detalles_orden.objects.all()
     serializer_class = Detalles_ordenSerializer
+
+
+#direccion
+
+class DireccionListCreate(generics.ListCreateAPIView):
+    queryset = Direccion.objects.all()
+    serializer_class = DireccionSerializer
+
+class DireccionDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Direccion.objects.all()
+    serializer_class = DireccionSerializer
+
+
+
+#Restaurante
+
+class RestauranteListCreate(generics.ListCreateAPIView):
+    queryset = Restaurante.objects.all()
+    serializer_class = RestauranteSerializer
+
+class RestauranteDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Restaurante.objects.all()
+    serializer_class = RestauranteSerializer
