@@ -2,7 +2,9 @@ from rest_framework import generics
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Resena, Especialidad
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
-from .serializers import OrdenSerializer, Detalles_ordenSerializer
+from .serializers import OrdenSerializer, Detalles_ordenSerializer, ResenaSerializer, EspecialidadSerializer
+from .serializers import PagoSerializer, EmpleadoSerializer, ProductoSerializer, ProveedorSerializer, PromocionesSerializer
+from .serializers import AdministradorSerializer, DireccionSerializer
 
 
 # Reseña
@@ -89,7 +91,7 @@ class AdministradorListCreate(generics.ListCreateAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
 
-class AdministardorDetail(generics.RetrieveUpdateDestroyAPIView):
+class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
 
