@@ -7,21 +7,22 @@ class Resena(models.Model):
     mensaje_reseña = models.CharField(max_length=20)
 
     def _str_(self):
-        return self.mensaje_reseña
+        return f'{self.mensaje_reseña}'
     
 
-class Especialidad(models.Model):
-    Plato_Del_Dia = models.CharField(max_length=20)
+class Menu_Dia(models.Model):
+    Entrada = models.CharField(max_length=20)
+    
 
     def _str_(self):
-        return self.Plato_Del_Dia
+        return f'{self.Entrada}'
 
 
 class Pago(models.Model):
     Metodo_pago = models.CharField(max_length=20)
     
     def _str_(self):
-        return self.Metodo_pago
+        return f'{self.Metodo_pago}'
 
 
 class Empleado(models.Model):
@@ -54,7 +55,7 @@ class Promociones(models.Model):
     Promocion = models.CharField(max_length=150)
      
     def __str__(self):
-        return self.Promocion
+        return f'{self.Promocion}'
 
 
 
@@ -77,23 +78,21 @@ class Direccion (models.Model):
 
 
 class Categorias(models.Model):
-    Entrada = models.CharField(max_length=20)
-    Postre = models.CharField(max_length=20)
-    Plato_Fuerte = models.CharField(max_length=20)
-    Bebida = models.CharField(max_length=20)
+    Categoria = models.CharField(max_length=50)
+
 
     def _str_(self):
-        return f'{self.Entrada} - {self.Postre} - {self.Plato_Fuerte} - {self.Bebida}' 
+        return f'{self.Categoria}' 
     
 
 
 class Restaurante (models.Model):
     Direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE)
-    Resena = models.ForeignKey('Reseña', on_delete=models.CASCADE)
+    mensaje_reseña = models.ForeignKey('Resena', on_delete=models.CASCADE)
     Administrador = models.ForeignKey('Administrador', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.Direccion} - {self.Resena} - {self.Administrador}'
+        return f'{self.Direccion} - {self.mensaje_reseña} - {self.Administrador}'
     
 
 class Usuario(models.Model):
@@ -110,7 +109,7 @@ class Menu(models.Model):
     Descripcion = models.CharField(max_length=50)
     precio = models.IntegerField()
     Promocion = models.ForeignKey('Promociones', on_delete=models.CASCADE)
-    Plato_Del_Dia = models.ForeignKey('Espacialidad', on_delete=models.CASCADE)
+    Plato_Del_Dia = models.ForeignKey(Menu_Dia, on_delete=models.CASCADE)
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
  
     def _str_(self):

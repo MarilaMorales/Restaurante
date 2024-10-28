@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('resena/', views.ResenaListCreate.as_view(), name='resena-list'),
     path('resena/<int:pk>/', views.ResenaDetail.as_view(), name='resena-detail'),
     
-    path('especialidad/', views.EspecialidadListCreate.as_view(), name='Especialidad-list'),
-    path('especialidad/<int:pk>/', views.EspecialidadDetail.as_view(), name='Especialidad-detail'),
+    path('Menu_del_Dia/', views.Menu_del_DiaListCreate.as_view(), name='Menu_del_Dia-list'),
+    path('Menu_del_Dia/<int:pk>/',views.Menu_Del_DiaDetail.as_view(), name='Menu_del_Dia-detail'),
     
     path('pago/', views.PagoListCreate.as_view(), name='Pago-list'),
     path('pago/<int:pk>/', views.PagoDetail.as_view(), name='Pago-detail'),
@@ -14,11 +15,11 @@ urlpatterns = [
     path('empleado/', views.EmpleadoListCreate.as_view(), name='Empleado-list'),
     path('empleado/<int:pk>/', views.EmpleadoDetail.as_view(), name='Empleado-detail'),
     
-    path('proveedor/', views.ProductoListCreate.as_view(), name='Producto-list'),
-    path('proveedor/<int:pk>/', views.ProductoDetail.as_view(), name='Producto-detail'),
+    path('producto/', views.ProductoListCreate.as_view(), name='Producto-list'),
+    path('producto/<int:pk>/', views.ProductoDetail.as_view(), name='Producto-detail'),
     
-    path('producto/', views.ProveedorListCreate.as_view(), name='Proveedor-list'),
-    path('producto/<int:pk>/', views.ProveedorDetail.as_view(), name='Proveedor-detail'),
+    path('proveedor/', views.ProveedorListCreate.as_view(), name='Proveedor-list'),
+    path('proveedor/<int:pk>/', views.ProveedorDetail.as_view(), name='Proveedor-detail'),
     
     path('promociones/', views.PromocionesListCreate.as_view(), name='Promociones-list'),
     path('promociones/<int:pk>/', views.PromocionesDetail.as_view(), name='Promociones-detail'),
@@ -46,4 +47,7 @@ urlpatterns = [
 
     path('detalles_orden/', views.Detalles_ordenListCreate.as_view(), name='Detalles_orden-list'),
     path('detalles_orden/<int:pk>/', views.Detalles_ordenDetail.as_view(), name='Detalles_orden-detail'),
+    
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
