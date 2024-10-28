@@ -91,7 +91,7 @@ class AdministradorListCreate(generics.ListCreateAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
 
-class AdministardorDetail(generics.RetrieveUpdateDestroyAPIView):
+class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
 
