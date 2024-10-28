@@ -1,7 +1,36 @@
 from rest_framework import serializers
-from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden
+from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Reseña, Especialidad, Pago, Empleado, Proveedor, Producto 
 
+class ReseñaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reseña
+        fields = '_all_'
+        
+class EspecialidadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Especialidad
+        fields = '_all_'
+        
+class PagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pago
+        fields = '_all_'
+        
+class EmpleadoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Empleado
+        fields = '_all_'
 
+class ProveedorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Proveedor
+        fields = '_all_'
+        
+class ProductoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Producto
+        fields = '_all_'
+        
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorias
@@ -40,5 +69,6 @@ class OrdenSerializer(serializers.ModelSerializer):
         
 class Detalles_ordenSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Detalles_orden
-        fields = '_all_'
+
+
+
