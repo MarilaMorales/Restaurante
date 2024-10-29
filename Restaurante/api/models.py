@@ -11,11 +11,12 @@ class Resena(models.Model):
     
 
 class Menu_Dia(models.Model):
-    Entrada = models.CharField(max_length=20)
+    Postre = models.CharField(max_length=20)
+    Plato_Fuerte = models.CharField(max_length=80)
+    Bebida = models.CharField(max_length=20)
     
-
     def _str_(self):
-        return f'{self.Entrada}'
+        return f'{self.Postre} - {self.Plato_Fuerte} - {self.Bebida}'
 
 
 class Pago(models.Model):
@@ -78,11 +79,11 @@ class Direccion (models.Model):
 
 
 class Categorias(models.Model):
-    Categorias = models.CharField(max_length=50)
+    Nombre_Categoria = models.CharField(max_length=50, default="Sin Categoría")
 
 
     def _str_(self):
-        return f'{self.Categorias}' 
+        return f'{self.Nombre_Categoria}' 
     
 
 
@@ -109,7 +110,7 @@ class Menu(models.Model):
     Descripcion = models.CharField(max_length=50)
     precio = models.IntegerField()
     Promocion = models.ForeignKey('Promociones', on_delete=models.CASCADE)
-    Plato_Del_Dia = models.ForeignKey(Menu_Dia, on_delete=models.CASCADE)
+    Plato_Del_Dia = models.ForeignKey('Menu_Dia', on_delete=models.CASCADE)
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
  
     def _str_(self):
