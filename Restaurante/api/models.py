@@ -11,10 +11,12 @@ class Resena(models.Model):
     
 
 class Especialidad(models.Model):
-    Plato_Del_Dia = models.CharField(max_length=20)
+    Plato_fuerte = models.CharField(max_length=20)
+    Postre = models.CharField(max_length=20)
+    Bebida = models.CharField(max_length=20)
 
     def _str_(self):
-        return self.Plato_Del_Dia
+        return f'{self.Plato_fuerte} - {self.Postre} - {self.Bebida}'
 
 
 class Pago(models.Model):

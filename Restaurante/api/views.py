@@ -138,8 +138,7 @@ class UsuarioListCreate(generics.ListCreateAPIView):
 
 class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-    
+    serializer_class = UsuarioSerializer    
     
     
 # Orden

@@ -37,6 +37,8 @@ urlpatterns = [
     
     path('usuario/', views.UsuarioListCreate.as_view(), name='Usuario-list'),
     path('usuario/<int:pk>/', views.UsuarioDetail.as_view(), name='Usuario-detail'),
+    path('usuario/user-desc', views.UsuarioListDes.as_view(), name='Usuario-list'),
+    
     
     path('orden/', views.OrdenListCreate.as_view(), name='Orden-list'),
     path('orden/<int:pk>/', views.OrdenDetail.as_view(), name='Orden-detail'),

@@ -82,7 +82,7 @@ class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orden
         fields = '_all_'
-    
+
     
 class MenuSerializer(serializers.ModelSerializer):
     class Meta:
