@@ -165,20 +165,39 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [IsAuthenticated]
+
+
+##### Usuario Consulta
+
+class UsuarioListDes(generics.ListAPIView):
+    queryset = Usuario.objects.all()
+    Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
+    serializer_class = UsuarioSerializer
+
+
+
     
     
     
 # Orden
 
 class OrdenListCreate(generics.ListCreateAPIView):
-    queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
-    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = Orden.objects.all()
+        estado = self.request.query_params.get('estado')
+        if estado:
+            queryset = queryset.filter(estado=estado)
+        return queryset
 
 class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
-    permission_classes = [IsAuthenticated]
+
+
+
+
  
 
 # Menu
@@ -205,3 +224,6 @@ class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = Detalles_ordenSerializer
     permission_classes = [IsAuthenticated]
+    
+    
+    
