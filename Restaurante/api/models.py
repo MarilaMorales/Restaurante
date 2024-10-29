@@ -1,4 +1,4 @@
-
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # Create your models here.
@@ -101,7 +101,16 @@ class Usuario(models.Model):
     apellido_usuario = models.CharField(max_length=100)
     correo = models.CharField(max_length=20)
     
-    def _str_(self):
+    def save(self, args, **kwargs):
+        self.clean()
+    
+        # Validar que el correo no exista
+    
+        if Usuario.objects.filter(correo=self.correo).exists():
+            raise ValidationError('El correo ya está en uso.')
+        super().save(args, **kwargs)
+    
+    def _str_(self):  
         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
 
 
@@ -117,16 +126,21 @@ class Menu(models.Model):
         return f'{self.Plato} - {self.Descripcion} - {self.precio} - {self.Promocion} - {self.Plato_Del_Dia} - {self.Categorias}' 
     
 
-
-
 class Orden(models.Model):
+    ESTADO_ORDEN=[
+        ('en_proceso', 'En Proceso')
+        ('finalizado', 'Finalizado')
+        ('entregado', 'Entregado')
+    ]
+
     fecha = models.DateField()
-    estado = models.CharField(max_length=20)
+    estado = models.CharField(max_length=20, choices=ESTADO_ORDEN)
     Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
     Empleado = models.ForeignKey('Empleado', on_delete=models.CASCADE)
-    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)
+    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)    
     
-    def _str_(self):
+    
+    def __str__(self):
         return f'{self.fecha} - {self.estado} - {self.Usuario} - {self.Empleado} - {self.Menu}'
 
 
