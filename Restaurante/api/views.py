@@ -169,11 +169,17 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
 
 ##### Usuario Consulta
 
+# class UsuarioListDes(generics.ListAPIView):
+#     queryset = Usuario.objects.all()
+#     Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
+#     serializer_class = UsuarioSerializer
+
 class UsuarioListDes(generics.ListAPIView):
     queryset = Usuario.objects.all()
-    Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
     serializer_class = UsuarioSerializer
 
+    def get_queryset(self):
+        return Usuario.objects.order_by('-Nombre_Usuario')
 
 
     
