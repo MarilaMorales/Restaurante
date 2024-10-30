@@ -101,14 +101,14 @@ class Usuario(models.Model):
     apellido_usuario = models.CharField(max_length=100)
     correo = models.CharField(max_length=20)
     
-    def save(self, args, **kwargs):
-        self.clean()
+    # def save(self, args, **kwargs):
+    #     self.clean()
     
-        # Validar que el correo no exista
+    #     # Validar que el correo no exista
     
-        if Usuario.objects.filter(correo=self.correo).exists():
-            raise ValidationError('El correo ya está en uso.')
-        super().save(args, **kwargs)
+    #     if Usuario.objects.filter(correo=self.correo).exists():
+    #         raise ValidationError('El correo ya está en uso.')
+    #     super().save(args, **kwargs)
     
     def _str_(self):  
         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
@@ -128,9 +128,9 @@ class Menu(models.Model):
 
 class Orden(models.Model):
     ESTADO_ORDEN=[
-        ('en_proceso', 'En Proceso')
-        ('finalizado', 'Finalizado')
-        ('entregado', 'Entregado')
+        ('en_proceso', 'En Proceso'),
+        ('finalizado', 'Finalizado'),
+        ('entregado', 'Entregado'),
     ]
 
     fecha = models.DateField()

@@ -77,6 +77,12 @@ class UsuarioSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Ya existe un usuario con este nombre.")
         return value
         
+                      
+    def validate_correo (self, value):
+        if Usuario.objects.filter(correo =value).exists():
+            raise serializers.ValidationError("Ya existe un correo con este nombre.")
+        return value
+        
         
 class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
