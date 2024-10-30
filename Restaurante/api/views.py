@@ -33,9 +33,6 @@ class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu_Dia.objects.all()
     serializer_class = Menu_DiaSerializer
 
-    
-    
-
 # Pago
 class PagoListCreate(generics.ListCreateAPIView):
     queryset = Pago.objects.all()
@@ -58,10 +55,7 @@ class EmpleadoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
     permission_classes = [IsAuthenticated]
-
-
-    
-    
+ 
 #Proveedor
 
 class ProveedorListCreate(generics.ListCreateAPIView):
@@ -112,8 +106,6 @@ class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
     permission_classes = [IsAuthenticated]
-
-
 
 #Direccion
 
@@ -172,11 +164,7 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
 class UsuarioListDes(generics.ListAPIView):
     queryset = Usuario.objects.all()
     Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
-    serializer_class = UsuarioSerializer
-
-
-
-    
+    serializer_class = UsuarioSerializer 
     
 # Orden
 
@@ -193,11 +181,6 @@ class OrdenListCreate(generics.ListCreateAPIView):
 class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
-
-
-
-
- 
 
 # Menu
 
@@ -218,6 +201,7 @@ class Detalles_ordenListCreate(generics.ListCreateAPIView):
     queryset = Detalles_orden.objects.all()
     serializer_class = Detalles_ordenSerializer
     permission_classes = [IsAuthenticated]
+
 
 class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
