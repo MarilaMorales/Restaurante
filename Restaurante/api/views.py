@@ -6,6 +6,18 @@ from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSeria
 from .serializers import OrdenSerializer, Detalles_ordenSerializer, ResenaSerializer
 from .serializers import PagoSerializer, EmpleadoSerializer, ProductoSerializer, ProveedorSerializer, PromocionesSerializer
 from .serializers import AdministradorSerializer, DireccionSerializer, RestauranteSerializer, Menu_DiaSerializer
+from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from .serializers import IsAdmin
+
+
+
+
+# class AdminOnlyView(APIView):
+#     permission_classes = [IsAdmin]
+
+#     def get(self, request):
+#         return Response({'message': 'Solo administradores'})
 
 
 # Reseña
@@ -233,3 +245,7 @@ class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     
     
     
+
+
+
+

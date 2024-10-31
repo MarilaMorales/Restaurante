@@ -2,6 +2,13 @@
 from rest_framework import serializers
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Restaurante
 from .models import Resena, Menu_Dia, Pago, Empleado, Proveedor, Producto, Promociones,Direccion
+# from rest_framework import permissions
+
+
+# class IsAdmin(permissions.BasePermission):
+#     def has_permission(self, request, view):
+#         return request.user and request.user.is_staff
+
 
 class ResenaSerializer(serializers.ModelSerializer):
     class Meta:
