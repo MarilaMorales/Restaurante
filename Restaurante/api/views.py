@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .serializers import RegistroSerializer
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Menu_Dia, Resena
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
@@ -11,17 +11,21 @@ from .serializers import OrdenSerializer, Detalles_ordenSerializer, ResenaSerial
 from .serializers import PagoSerializer, EmpleadoSerializer, ProductoSerializer, ProveedorSerializer, PromocionesSerializer
 from .serializers import AdministradorSerializer, DireccionSerializer, RestauranteSerializer, Menu_DiaSerializer
 from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from .serializers import IsAdmin
+from rest_framework import generics
+from .models import Administrador
+from .serializers import AdministradorSerializer
+from middleware import admin_middleware
+from rest_framework.response import Response
+from django.contrib.auth import authenticate, login
+from rest_framework_simplejwt.tokens import RefreshToken
+from .serializers import RegistroSerializer 
 
 
 
 
-# class AdminOnlyView(APIView):
-#     permission_classes = [IsAdmin]
 
-#     def get(self, request):
-#         return Response({'message': 'Solo administradores'})
+
+
 
 
 # Reseña
@@ -124,10 +128,26 @@ class AdministradorListCreate(generics.ListCreateAPIView):
     serializer_class = AdministradorSerializer
     permission_classes = [IsAuthenticated]
 
+    def get(self, request, *args, **kwargs):
+        return admin_middleware(super().get)(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return admin_middleware(super().post)(request, *args, **kwargs)
+
+
+
 class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
     permission_classes = [IsAuthenticated]
+
+
+
+
+
+
+
+
 
 
 
@@ -188,6 +208,24 @@ class RegistroView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegistroSerializer
     permission_classes = [AllowAny]
+
+class LoginView(generics.GenericAPIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)  # Inicia sesión al usuario
+            refresh = RefreshToken.for_user(user)  # Genera tokens
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+        return Response({'error': 'Credenciales inválidas'}, status=400)
+
 
 
 ##### Usuario Consulta
@@ -256,6 +294,13 @@ class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     
     
     
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    # Puedes personalizar este serializer si es necesario
+    pass
+
+class TokenRefreshView(TokenRefreshView):
+    pass
 
 
 
