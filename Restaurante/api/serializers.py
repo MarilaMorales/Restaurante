@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Restaurante
 from .models import Resena, Menu_Dia, Pago, Empleado, Proveedor, Producto, Promociones,Direccion
+from django.contrib.auth.models import User
 # from rest_framework import permissions
 
 
@@ -109,5 +110,15 @@ class Detalles_ordenSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+#codificacion de contraseña c 
 
+class RegistroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("username", "password")
 
+    def create(self, validated_data):
+        usuario = User(**validated_data)
+        usuario.set_password(validated_data['password'])  # Codifica la contraseña
+        usuario.save()  # Guarda el usuario
+        return usuario

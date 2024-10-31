@@ -1,5 +1,9 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import User
+from .serializers import RegistroSerializer
+
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Menu_Dia, Resena
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
@@ -177,6 +181,13 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [IsAuthenticated]
+    
+    
+    
+class RegistroView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegistroSerializer
+    permission_classes = [AllowAny]
 
 
 ##### Usuario Consulta

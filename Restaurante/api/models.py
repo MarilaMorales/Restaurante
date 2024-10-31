@@ -99,7 +99,7 @@ class Restaurante (models.Model):
 class Usuario(models.Model):
     Nombre_Usuario = models.CharField(max_length=100, unique=True)
     apellido_usuario = models.CharField(max_length=100)
-    password= models.CharField(max_length=60)
+    password= models.CharField(max_length=60, default="Sin Categoría")
     correo = models.CharField(max_length=20)
     
     # def save(self, args, **kwargs):
