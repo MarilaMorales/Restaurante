@@ -18,14 +18,7 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import RegistroSerializer 
-from middleware.admin_middleware import admin_middleware
-
-
-
-
-
-
-
+# from .middleware import admin_middleware
 
 
 
@@ -34,13 +27,13 @@ from middleware.admin_middleware import admin_middleware
 class ResenaListCreate(generics.ListCreateAPIView):
     queryset = Resena.objects.all()
     serializer_class = ResenaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
 
 class ResenaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Resena.objects.all()
     serializer_class = ResenaSerializer
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [AllowAny] 
 
 
 # Especialidades
@@ -48,11 +41,13 @@ class ResenaDetail(generics.RetrieveUpdateDestroyAPIView):
 class Menu_DiaListCreate(generics.ListCreateAPIView):
     queryset = Menu_Dia.objects.all()
     serializer_class = Menu_DiaSerializer
+    permission_classes = [AllowAny]
  
 
 class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu_Dia.objects.all()
     serializer_class = Menu_DiaSerializer
+    permission_classes = [AllowAny]
 
     
     
@@ -61,24 +56,24 @@ class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
 class PagoListCreate(generics.ListCreateAPIView):
     queryset = Pago.objects.all()
     serializer_class = PagoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class PagoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Pago.objects.all()
     serializer_class = PagoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 # Empleado
 class EmpleadoListCreate(generics.ListCreateAPIView):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class EmpleadoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Empleado.objects.all()
     serializer_class = EmpleadoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
     
@@ -88,12 +83,12 @@ class EmpleadoDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProveedorListCreate(generics.ListCreateAPIView):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class ProveedorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Proveedor.objects.all()
     serializer_class = ProveedorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 
@@ -101,12 +96,12 @@ class ProveedorDetail(generics.RetrieveUpdateDestroyAPIView):
 class ProductoListCreate(generics.ListCreateAPIView):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class ProductoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     
 # Promociones
@@ -114,12 +109,12 @@ class ProductoDetail(generics.RetrieveUpdateDestroyAPIView):
 class PromocionesListCreate(generics.ListCreateAPIView):
     queryset = Promociones.objects.all()
     serializer_class = PromocionesSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class PromocionesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Promociones.objects.all()
     serializer_class = PromocionesSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
 
 # Administradores 
@@ -127,20 +122,20 @@ class PromocionesDetail(generics.RetrieveUpdateDestroyAPIView):
 class AdministradorListCreate(generics.ListCreateAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
-    def get(self, request, *args, **kwargs):
-        return admin_middleware(super().get)(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     return admin_middleware(super().get)(request, *args, **kwargs)
 
-    def post(self, request, *args, **kwargs):
-        return admin_middleware(super().post)(request, *args, **kwargs)
+    # def post(self, request, *args, **kwargs):
+    #     return admin_middleware(super().post)(request, *args, **kwargs)
 
 
 
 class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 
@@ -157,12 +152,12 @@ class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
 class DireccionListCreate(generics.ListCreateAPIView):
     queryset = Direccion.objects.all()
     serializer_class = DireccionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class DireccionDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Direccion.objects.all()
     serializer_class = DireccionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 
@@ -170,12 +165,12 @@ class DireccionDetail(generics.RetrieveUpdateDestroyAPIView):
 class CategoriaListCreate(generics.ListCreateAPIView):
     queryset = Categorias.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class CategoriaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categorias.objects.all()
     serializer_class = CategoriaSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     
 #Restaurante
@@ -183,12 +178,12 @@ class CategoriaDetail(generics.RetrieveUpdateDestroyAPIView):
 class RestauranteListCreate(generics.ListCreateAPIView):
     queryset = Restaurante.objects.all()
     serializer_class = RestauranteSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class RestauranteDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurante.objects.all()
     serializer_class = RestauranteSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 # Usuario
@@ -196,12 +191,12 @@ class RestauranteDetail(generics.RetrieveUpdateDestroyAPIView):
 class UsuarioListCreate(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     
   
@@ -263,6 +258,7 @@ class UsuarioListDes(generics.ListAPIView):
 
 class OrdenListCreate(generics.ListCreateAPIView):
     serializer_class = OrdenSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         queryset = Orden.objects.all()
@@ -274,6 +270,7 @@ class OrdenListCreate(generics.ListCreateAPIView):
 class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = OrdenSerializer
+    permission_classes = [AllowAny]
 
 
 
@@ -285,11 +282,13 @@ class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
 class MenuListCreate(generics.ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    permission_classes = [AllowAny]
 
 
 class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    permission_classes = [AllowAny]
  
         
 
@@ -298,23 +297,14 @@ class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
 class Detalles_ordenListCreate(generics.ListCreateAPIView):
     queryset = Detalles_orden.objects.all()
     serializer_class = Detalles_ordenSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
     serializer_class = Detalles_ordenSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     
     
-    
-
-# class CustomTokenObtainPairView(TokenObtainPairView):
-#     # Puedes personalizar este serializer si es necesario
-#     pass
-
-# class TokenRefreshView(TokenRefreshView):
-#     pass
-
 
 
 

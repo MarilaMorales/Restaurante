@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -99,14 +100,13 @@ class Restaurante (models.Model):
 
 
 class Usuario(models.Model):
-    Nombre_Usuario = models.CharField(max_length=100, unique=True)
-    apellido_usuario = models.CharField(max_length=100)
-    password = models.CharField(max_length=60, default="Sin Categoría")
-    correo = models.CharField(max_length=20)
-    rol = models.CharField(max_length=20, choices=[('admin', 'Administrador'), ('user', 'Usuario')], default='user')
+    telefono = models.CharField(max_length=20)
+    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    
 
     def __str__(self):  
-        return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo} - {self.rol}'
+        return f'{self.telefono} - {self.direccion} - {self.usuario}'
 
 
 
