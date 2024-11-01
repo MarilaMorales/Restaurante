@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
+
 # Create your models here.
 
 class Resena(models.Model):
@@ -96,8 +97,6 @@ class Restaurante (models.Model):
         return f'{self.Direccion} - {self.mensaje_reseña} - {self.Administrador}'
     
 
-
-from django.db import models
 
 class Usuario(models.Model):
     Nombre_Usuario = models.CharField(max_length=100, unique=True)

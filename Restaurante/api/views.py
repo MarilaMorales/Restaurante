@@ -14,11 +14,12 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from .models import Administrador
 from .serializers import AdministradorSerializer
-from middleware import admin_middleware
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import RegistroSerializer 
+from middleware.admin_middleware import admin_middleware
+
 
 
 
@@ -307,12 +308,12 @@ class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     
     
 
-class CustomTokenObtainPairView(TokenObtainPairView):
-    # Puedes personalizar este serializer si es necesario
-    pass
+# class CustomTokenObtainPairView(TokenObtainPairView):
+#     # Puedes personalizar este serializer si es necesario
+#     pass
 
-class TokenRefreshView(TokenRefreshView):
-    pass
+# class TokenRefreshView(TokenRefreshView):
+#     pass
 
 
 

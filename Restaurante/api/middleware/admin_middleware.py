@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 
-from django.http import JsonResponse
 
 def admin_middleware(get_response):
     def middleware(request):
