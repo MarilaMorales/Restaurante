@@ -203,11 +203,23 @@ class UsuarioDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
     
     
-    
+  
+  
 class RegistroView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    queryset = Usuario.objects.all()
     serializer_class = RegistroSerializer
     permission_classes = [AllowAny]
+  
+  
+
+    
+# class RegistroView(generics.CreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = RegistroSerializer
+#     permission_classes = [AllowAny]
+
+##Cambiamos User por Usuario
+
 
 class LoginView(generics.GenericAPIView):
     permission_classes = [AllowAny]

@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Restaurante
 from .models import Resena, Menu_Dia, Pago, Empleado, Proveedor, Producto, Promociones,Direccion
@@ -69,11 +68,17 @@ class RestauranteSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
+
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = '__all__'
-        
+
+    def create(self, validated_data):
+        # Asigna un rol por defecto si no se proporciona
+        validated_data['rol'] = validated_data.get('rol', 'user')
+        return super().create(validated_data)
+
               
     def validate_Nombre_Usuario (self, value):
         if Usuario.objects.filter(Nombre_Usuario =value).exists():

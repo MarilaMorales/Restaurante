@@ -96,23 +96,41 @@ class Restaurante (models.Model):
         return f'{self.Direccion} - {self.mensaje_reseña} - {self.Administrador}'
     
 
+
+from django.db import models
+
 class Usuario(models.Model):
     Nombre_Usuario = models.CharField(max_length=100, unique=True)
     apellido_usuario = models.CharField(max_length=100)
-    password= models.CharField(max_length=60, default="Sin Categoría")
+    password = models.CharField(max_length=60, default="Sin Categoría")
     correo = models.CharField(max_length=20)
+    rol = models.CharField(max_length=20, choices=[('admin', 'Administrador'), ('user', 'Usuario')], default='user')
+
+    def __str__(self):  
+        return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo} - {self.rol}'
+
+
+
+
+
+
+
+
+
+# class Usuario(models.Model):
+#     Nombre_Usuario = models.CharField(max_length=100, unique=True)
+#     apellido_usuario = models.CharField(max_length=100)
+#     password= models.CharField(max_length=60, default="Sin Categoría")
+#     correo = models.CharField(max_length=20)
     
-    # def save(self, args, **kwargs):
-    #     self.clean()
     
-    #     # Validar que el correo no exista
-    
-    #     if Usuario.objects.filter(correo=self.correo).exists():
-    #         raise ValidationError('El correo ya está en uso.')
-    #     super().save(args, **kwargs)
-    
-    def _str_(self):  
-        return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
+#     def _str_(self):  
+#         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
+
+
+
+
+
 
 
 class Menu(models.Model):
