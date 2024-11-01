@@ -102,7 +102,7 @@ class Usuario(models.Model):
     def save(self, args, **kwargs):
         self.clean()
     
-        # Validar que el correo no exista
+        # consultar que el correo no exista
     
         if Usuario.objects.filter(correo=self.correo).exists():
             raise ValidationError('El correo ya está en uso.')

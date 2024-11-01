@@ -1,4 +1,5 @@
 from rest_framework import generics
+from django.db.models import Count
 from rest_framework.permissions import IsAuthenticated
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Menu_Dia, Resena
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
@@ -165,7 +166,7 @@ class UsuarioListDes(generics.ListAPIView):
     queryset = Usuario.objects.all()
     Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
     serializer_class = UsuarioSerializer 
-    
+     
 # Orden
 
 class OrdenListCreate(generics.ListCreateAPIView):
@@ -192,8 +193,15 @@ class MenuListCreate(generics.ListCreateAPIView):
 class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
- 
-        
+    
+## consulta menu mas vendido 
+
+class MenuMasVendidos(generics.ListAPIView):
+    serializer_class = MenuSerializer
+
+    def get_queryset(self):
+        return Menu.objects.annotate(vendido_count=Count('detalles_orden__orden')).order_by('-vendido_count')[:3]
+
 
 # Detalles_Orden
 
