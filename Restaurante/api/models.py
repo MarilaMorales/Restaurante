@@ -1,27 +1,31 @@
-
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
 class Resena(models.Model):
     mensaje_reseña = models.CharField(max_length=20)
 
-    def __str__(self):
-        return self.mensaje_reseña
+    def _str_(self):
+        return f'{self.mensaje_reseña}'
     
 
-class Especialidad(models.Model):
-    Plato_Del_Dia = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.Plato_Del_Dia
+class Menu_Dia(models.Model):
+    Postre = models.CharField(max_length=20)
+    Plato_Fuerte = models.CharField(max_length=80)
+    Bebida = models.CharField(max_length=20)
+    
+    def _str_(self):
+        return f'{self.Postre} - {self.Plato_Fuerte} - {self.Bebida}'
 
 
 class Pago(models.Model):
     Metodo_pago = models.CharField(max_length=20)
     
-    def __str__(self):
-        return self.Metodo_pago
+    def _str_(self):
+        return f'{self.Metodo_pago}'
 
 
 class Empleado(models.Model):
@@ -54,7 +58,7 @@ class Promociones(models.Model):
     Promocion = models.CharField(max_length=150)
      
     def __str__(self):
-        return self.Promocion
+        return f'{self.Promocion}'
 
 
 
@@ -77,47 +81,51 @@ class Direccion (models.Model):
 
 
 class Categorias(models.Model):
-    Entrada = models.CharField(max_length=20)
-    Postre = models.CharField(max_length=20)
-    Plato_Fuerte = models.CharField(max_length=20)
-    Bebida = models.CharField(max_length=20)
+    Nombre_Categoria = models.CharField(max_length=50, default="Sin Categoría")
 
-    def __str__(self):
-        return f'{self.Entrada} - {self.Postre} - {self.Plato_Fuerte} - {self.Bebida}' 
+
+    def _str_(self):
+        return f'{self.Nombre_Categoria}' 
     
 
 
 class Restaurante (models.Model):
     Direccion = models.ForeignKey('Direccion', on_delete=models.CASCADE)
-    Resena = models.ForeignKey('Reseña', on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return f'{self.Direccion} - {self.Resena}'
-    
-
-class Usuario(models.Model):
-    Nombre_Usuario = models.CharField(max_length=100, unique=True)
-    apellido_usuario = models.CharField(max_length=100)
-    correo = models.CharField(max_length=20)
-    
-    def __str__(self):
-        return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
-
-
-class Orden(models.Model):
-    ESTADO_ORDEN=[
-        ('en_proceso', 'En Proceso')
-        ('finalizado', 'Finalizado')
-        ('entregado', 'Entregado')
-    ]
-
-    fecha = models.DateField()
-    estado = models.CharField(max_length=20, choices=ESTADO_ORDEN)
-    Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    mensaje_reseña = models.ForeignKey('Resena', on_delete=models.CASCADE)
     Administrador = models.ForeignKey('Administrador', on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.fecha} - {self.estado} - {self.Usuario}'
+        return f'{self.Direccion} - {self.mensaje_reseña} - {self.Administrador}'
+    
+
+
+class Usuario(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    def __str__(self):  
+        return f'{self.usuario}'
+
+
+
+
+
+
+
+
+
+# class Usuario(models.Model):
+#     Nombre_Usuario = models.CharField(max_length=100, unique=True)
+#     apellido_usuario = models.CharField(max_length=100)
+#     password= models.CharField(max_length=60, default="Sin Categoría")
+#     correo = models.CharField(max_length=20)
+    
+    
+#     def _str_(self):  
+#         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
+
+
+
+
 
 
 
@@ -126,24 +134,41 @@ class Menu(models.Model):
     Descripcion = models.CharField(max_length=50)
     precio = models.IntegerField()
     Promocion = models.ForeignKey('Promociones', on_delete=models.CASCADE)
-    Plato_Del_Dia = models.ForeignKey('Espacialidad', on_delete=models.CASCADE)
+    Plato_Del_Dia = models.ForeignKey('Menu_Dia', on_delete=models.CASCADE)
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
  
-    def __str__(self):
-        return f'{self.Platolato} - {self.Descripcion} - {self.precio} - {self.Categorias}' 
+    def _str_(self):
+        return f'{self.Plato} - {self.Descripcion} - {self.precio} - {self.Promocion} - {self.Plato_Del_Dia} - {self.Categorias}' 
     
+
+class Orden(models.Model):
+    ESTADO_ORDEN=[
+        ('en_proceso', 'En Proceso'),
+        ('finalizado', 'Finalizado'),
+        ('entregado', 'Entregado'),
+    ]
+
+    fecha = models.DateField()
+    estado = models.CharField(max_length=20, choices=ESTADO_ORDEN)
+    Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
+    Empleado = models.ForeignKey('Empleado', on_delete=models.CASCADE)
+    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)    
+    
+    
+    def __str__(self):
+        return f'{self.fecha} - {self.estado} - {self.Usuario} - {self.Empleado} - {self.Menu}'
+
 
 
 class Detalles_orden(models.Model):
     Orden = models.ForeignKey('Orden', on_delete=models.CASCADE)
-    Menu = models.ForeignKey('Menu', on_delete=models.CASCADE)
     Pago = models.ForeignKey('Pago', on_delete=models.CASCADE)
-    Empleado = models.ForeignKey('Empleado', on_delete=models.CASCADE)
+    Restaurante = models.ForeignKey('Restaurante', on_delete=models.CASCADE)
     Cantidad = models.IntegerField()
     Total = models.IntegerField()
 
-    def __str__(self):
-        return f'{self.Orden} - {self.Menu} - {self.Cantidad} - {self.Total}'
+    def _str_(self):
+        return f'{self.Orden} - {self.Pago} - {self.Restaurante} - {self.Cantidad} - {self.Total} '
         
 
     
