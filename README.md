@@ -1,5 +1,13 @@
 ## Nombre del Proyecto: Laboratorio API
 
+
+## Integrantes:
+
+- Jennifer Guadamuz
+- Bryan Aragon
+- Freddy Torres
+- Maria Laura Morales
+
 ## API de Gestión de Restaurantes
 
 
