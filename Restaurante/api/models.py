@@ -6,21 +6,21 @@ from django.db import models
 class Resena(models.Model):
     mensaje_reseña = models.CharField(max_length=20)
 
-    def _str_(self):
+    def __str__(self):
         return self.mensaje_reseña
     
 
 class Especialidad(models.Model):
     Plato_Del_Dia = models.CharField(max_length=20)
 
-    def _str_(self):
+    def __str__(self):
         return self.Plato_Del_Dia
 
 
 class Pago(models.Model):
     Metodo_pago = models.CharField(max_length=20)
     
-    def _str_(self):
+    def __str__(self):
         return self.Metodo_pago
 
 
@@ -29,14 +29,14 @@ class Empleado(models.Model):
     Apellido = models.CharField(max_length=20)
     Codigo_empleado = models.IntegerField()
 
-    def _str_(self):
+    def __str__(self):
         return f'{self.Nombre_empleado} - {self.Codigo_empleado}'
 
 class Proveedor(models.Model):
     Nombre_Proveedor = models.CharField(max_length=20)
     Telefono = models.IntegerField()
     
-    def _str_(self):
+    def __str__(self):
         return f'{self.Nombre_Proveedor} - {self.Telefono}'
 
      
@@ -45,7 +45,7 @@ class Producto(models.Model):
     stock = models.CharField(max_length=20)    
     Proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
    
-    def _str_(self):
+    def __str__(self):
         return f'{self.stock} - {self.ingrediente}- {self.Proveedor}'
 
 
@@ -62,7 +62,7 @@ class Administrador(models.Model):
     nombre_admin = models.CharField(max_length=50)
     apellido_admin = models.CharField(max_length=50)
  
-    def _str_(self):
+    def __str__(self):
         return f'{self.nombre_admin} - {self.apellido_admin}' 
 
 
@@ -82,7 +82,7 @@ class Categorias(models.Model):
     Plato_Fuerte = models.CharField(max_length=20)
     Bebida = models.CharField(max_length=20)
 
-    def _str_(self):
+    def __str__(self):
         return f'{self.Entrada} - {self.Postre} - {self.Plato_Fuerte} - {self.Bebida}' 
     
 
@@ -100,17 +100,23 @@ class Usuario(models.Model):
     apellido_usuario = models.CharField(max_length=100)
     correo = models.CharField(max_length=20)
     
-    def _str_(self):
+    def __str__(self):
         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
 
 
 class Orden(models.Model):
+    ESTADO_ORDEN=[
+        ('en_proceso', 'En Proceso')
+        ('finalizado', 'Finalizado')
+        ('entregado', 'Entregado')
+    ]
+
     fecha = models.DateField()
-    estado = models.CharField(max_length=20)
+    estado = models.CharField(max_length=20, choices=ESTADO_ORDEN)
     Usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
     Administrador = models.ForeignKey('Administrador', on_delete=models.CASCADE)
     
-    def _str_(self):
+    def __str__(self):
         return f'{self.fecha} - {self.estado} - {self.Usuario}'
 
 
@@ -123,7 +129,7 @@ class Menu(models.Model):
     Plato_Del_Dia = models.ForeignKey('Espacialidad', on_delete=models.CASCADE)
     Categorias = models.ForeignKey('Categorias', on_delete=models.CASCADE)
  
-    def _str_(self):
+    def __str__(self):
         return f'{self.Platolato} - {self.Descripcion} - {self.precio} - {self.Categorias}' 
     
 
@@ -136,7 +142,7 @@ class Detalles_orden(models.Model):
     Cantidad = models.IntegerField()
     Total = models.IntegerField()
 
-    def _str_(self):
+    def __str__(self):
         return f'{self.Orden} - {self.Menu} - {self.Cantidad} - {self.Total}'
         
 

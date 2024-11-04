@@ -92,6 +92,16 @@ class MenuSerializer(serializers.ModelSerializer):
         
 class Detalles_ordenSerializer(serializers.ModelSerializer):
     class Meta:
+          model = Detalles_orden
+          fields = '_all_'
 
 
-
+class RegistroSerializer(serializers.ModelSerializer):
+    class Meta: #esta juega le decimos que datos queremos guardar
+        model= Usuario #Aqui le decimos de donde en la tabla auth_user
+        fields= ( "username", "password", ) #las filas donde se van a guardar la informacion
+    def create(self, validated_data): #usamos  el metodo create basicamente crea un usuario
+       Usuario= Usuario(**validated_data) #recibe los datos cuando alguien se quiere registar
+       Usuario.set_password(validated_data['password'])#luego aca codifica la contraseña ingresada
+       Usuario.save()# y la guarda
+       return 
