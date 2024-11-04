@@ -1,6 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from django.contrib import admin
 from . import views
+from .views import RegistroView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 
 urlpatterns = [
     
@@ -40,7 +43,8 @@ urlpatterns = [
     
     path('usuario/', views.UsuarioListCreate.as_view(), name='Usuario-list'),
     path('usuario/<int:pk>/', views.UsuarioDetail.as_view(), name='Usuario-detail'),
-    path('usuario/user-desc', views.UsuarioListDes.as_view(), name='Usuario-list'),
+    path('usuarios-desc/', views.UsuarioListDes.as_view(), name='usuarios_desc'),
+
     
     path('orden/', views.OrdenListCreate.as_view(), name='Orden-list'),
     path('orden/<int:pk>/', views.OrdenDetail.as_view(), name='Orden-detail'),
@@ -53,4 +57,11 @@ urlpatterns = [
     
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    
+    path('register/', views.RegistroView.as_view(), name='register'),
+    path('login/', views.LoginView.as_view(), name='login'),
 ]
+
+
+

@@ -1,5 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -94,22 +96,35 @@ class Restaurante (models.Model):
         return f'{self.Direccion} - {self.mensaje_reseña} - {self.Administrador}'
     
 
+
 class Usuario(models.Model):
-    Nombre_Usuario = models.CharField(max_length=100, unique=True)
-    apellido_usuario = models.CharField(max_length=100)
-    correo = models.CharField(max_length=20)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     
-    def save(self, args, **kwargs):
-        self.clean()
+    def __str__(self):  
+        return f'{self.usuario}'
+
+
+
+
+
+
+
+
+
+# class Usuario(models.Model):
+#     Nombre_Usuario = models.CharField(max_length=100, unique=True)
+#     apellido_usuario = models.CharField(max_length=100)
+#     password= models.CharField(max_length=60, default="Sin Categoría")
+#     correo = models.CharField(max_length=20)
     
-        # consultar que el correo no exista
     
-        if Usuario.objects.filter(correo=self.correo).exists():
-            raise ValidationError('El correo ya está en uso.')
-        super().save(args, **kwargs)
-    
-    def _str_(self):  
-        return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
+#     def _str_(self):  
+#         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
+
+
+
+
+
 
 
 class Menu(models.Model):
@@ -126,9 +141,9 @@ class Menu(models.Model):
 
 class Orden(models.Model):
     ESTADO_ORDEN=[
-        ('en_proceso', 'En Proceso')
-        ('finalizado', 'Finalizado')
-        ('entregado', 'Entregado')
+        ('en_proceso', 'En Proceso'),
+        ('finalizado', 'Finalizado'),
+        ('entregado', 'Entregado'),
     ]
 
     fecha = models.DateField()
