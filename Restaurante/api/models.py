@@ -18,7 +18,7 @@ class Menu_Dia(models.Model):
     Bebida = models.CharField(max_length=20)
     
     def _str_(self):
-        return f'{self.Postre} - {self.Plato_Fuerte} - {self.Bebida}'
+        return self.Plato_Del_Dia
 
 
 class Pago(models.Model):
@@ -59,8 +59,6 @@ class Promociones(models.Model):
      
     def __str__(self):
         return f'{self.Promocion}'
-
-
 
 class Administrador(models.Model):
     nombre_admin = models.CharField(max_length=50)
@@ -107,12 +105,6 @@ class Usuario(models.Model):
 
 
 
-
-
-
-
-
-
 # class Usuario(models.Model):
 #     Nombre_Usuario = models.CharField(max_length=100, unique=True)
 #     apellido_usuario = models.CharField(max_length=100)
@@ -122,10 +114,6 @@ class Usuario(models.Model):
     
 #     def _str_(self):  
 #         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
-
-
-
-
 
 
 

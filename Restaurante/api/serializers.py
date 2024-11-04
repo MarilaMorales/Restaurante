@@ -96,7 +96,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class OrdenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Orden
-        fields = '__all__'
+        fields = '_all_'
     
     
 class MenuSerializer(serializers.ModelSerializer):
