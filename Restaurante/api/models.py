@@ -105,12 +105,6 @@ class Usuario(models.Model):
 
 
 
-
-
-
-
-
-
 # class Usuario(models.Model):
 #     Nombre_Usuario = models.CharField(max_length=100, unique=True)
 #     apellido_usuario = models.CharField(max_length=100)
@@ -120,10 +114,6 @@ class Usuario(models.Model):
     
 #     def _str_(self):  
 #         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
-
-
-
-
 
 
 
