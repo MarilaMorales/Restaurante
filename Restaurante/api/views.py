@@ -248,7 +248,7 @@ class UsuarioListDes(generics.ListAPIView):
     serializer_class = UsuarioSerializer
 
     def get_queryset(self):
-        return Usuario.objects.order_by('-Nombre_Usuario')
+        return Usuario.objects.order_by('-username')
 
 
     

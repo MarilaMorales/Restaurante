@@ -82,13 +82,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
 
               
     def validate_Nombre_Usuario (self, value):
-        if Usuario.objects.filter(Nombre_Usuario =value).exists():
+        if Usuario.objects.filter(username =value).exists():
             raise serializers.ValidationError("Ya existe un usuario con este nombre.")
         return value
         
                       
     def validate_correo (self, value):
-        if Usuario.objects.filter(correo =value).exists():
+        if Usuario.objects.filter(email =value).exists():
             raise serializers.ValidationError("Ya existe un correo con este nombre.")
         return value
         

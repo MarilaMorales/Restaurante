@@ -100,13 +100,10 @@ class Restaurante (models.Model):
 
 
 class Usuario(models.Model):
-    telefono = models.CharField(max_length=20)
-    direccion = models.ForeignKey(Direccion, on_delete=models.CASCADE)
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     
-
     def __str__(self):  
-        return f'{self.telefono} - {self.direccion} - {self.usuario}'
+        return f'{self.usuario}'
 
 
 
