@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .serializers import RegistroSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.db.models import Count
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Menu_Dia, Resena
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
@@ -19,7 +19,7 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import RegistroSerializer 
-# from .middleware import admin_middleware
+
 
 
 
@@ -234,10 +234,6 @@ class LoginView(generics.GenericAPIView):
 
 ##### Usuario Consulta
 
-# class UsuarioListDes(generics.ListAPIView):
-#     queryset = Usuario.objects.all()
-#     Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
-#     serializer_class = UsuarioSerializer
 
 class UsuarioListDes(generics.ListAPIView):
     queryset = Usuario.objects.all()
@@ -280,6 +276,25 @@ class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     permission_classes = [AllowAny]
+ 
+ 
+ ## consulta menu mas vendido 
+ 
+# class MenuMasVendidos(generics.ListAPIView):
+#     serializer_class = MenuSerializer
+#     def get_queryset(self):
+#         return Menu.objects.annotate(vendido_count=Count('detalles_orden__orden')).order_by('-vendido_count')[:3]
+ 
+class MenuMasVendidos(generics.ListAPIView):
+    serializer_class = MenuSerializer
+
+    def get_queryset(self):
+        return (
+            Menu.objects
+            .annotate(vendido_count=Count('orden__detalles_orden'))
+            .order_by('-vendido_count')[:3]
+        )
+ 
  
         
 
