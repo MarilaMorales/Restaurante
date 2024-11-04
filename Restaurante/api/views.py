@@ -1,4 +1,6 @@
 from rest_framework import generics
+from django.db.models import Count
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .serializers import RegistroSerializer
@@ -47,9 +49,6 @@ class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu_Dia.objects.all()
     serializer_class = Menu_DiaSerializer
     permission_classes = [AllowAny]
-
-    
-    
 
 # Pago
 class PagoListCreate(generics.ListCreateAPIView):
@@ -135,8 +134,6 @@ class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
     permission_classes = [AllowAny]
-
-
 
 
 
@@ -267,11 +264,6 @@ class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrdenSerializer
     permission_classes = [AllowAny]
 
-
-
-
- 
-
 # Menu
 
 class MenuListCreate(generics.ListCreateAPIView):
@@ -312,6 +304,7 @@ class Detalles_ordenListCreate(generics.ListCreateAPIView):
     queryset = Detalles_orden.objects.all()
     serializer_class = Detalles_ordenSerializer
     permission_classes = [AllowAny]
+
 
 class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
