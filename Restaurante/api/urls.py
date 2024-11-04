@@ -6,12 +6,14 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
 urlpatterns = [
+    
     path('resena/', views.ResenaListCreate.as_view(), name='resena-list'),
     path('resena/<int:pk>/', views.ResenaDetail.as_view(), name='resena-detail'),
     
     path('Menu_Dia/', views.Menu_DiaListCreate.as_view(), name='Menu_Dia-list'),
     path('Menu_Dia/<int:pk>/',views.Menu_DiaDetail.as_view(), name='Menu_Dia-detail'),
-    
+    path('menus/mas-vendidos/',views.MenuMasVendidos.as_view(), name='menus_mas_vendidos'),
+
     path('pago/', views.PagoListCreate.as_view(), name='Pago-list'),
     path('pago/<int:pk>/', views.PagoDetail.as_view(), name='Pago-detail'),
     
@@ -49,6 +51,7 @@ urlpatterns = [
     
     path('menu/', views.MenuListCreate.as_view(), name='Menu-list'),
     path('menu/<int:pk>/', views.MenuDetail.as_view(), name='Menu-detail'),
+    path('menus-mas-vendidos/',views.MenuMasVendidos.as_view(), name='menus_mas_vendidos'),
 
     path('detalles_orden/', views.Detalles_ordenListCreate.as_view(), name='Detalles_orden-list'),
     path('detalles_orden/<int:pk>/', views.Detalles_ordenDetail.as_view(), name='Detalles_orden-detail'),

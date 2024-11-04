@@ -18,7 +18,7 @@ class Menu_Dia(models.Model):
     Bebida = models.CharField(max_length=20)
     
     def _str_(self):
-        return f'{self.Postre} - {self.Plato_Fuerte} - {self.Bebida}'
+        return self.Plato_Del_Dia
 
 
 class Pago(models.Model):
@@ -60,8 +60,6 @@ class Promociones(models.Model):
     def __str__(self):
         return f'{self.Promocion}'
 
-
-
 class Administrador(models.Model):
     nombre_admin = models.CharField(max_length=50)
     apellido_admin = models.CharField(max_length=50)
@@ -101,15 +99,10 @@ class Restaurante (models.Model):
 
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    rol = models.CharField(max_length=20, choices=[('admin', 'Administrador'), ('user', 'Usuario')], default='user')
     
     def __str__(self):  
-        return f'{self.usuario}'
-
-
-
-
-
-
+        return f'{self.usuario}- {self.rol}'
 
 
 
@@ -122,10 +115,6 @@ class Usuario(models.Model):
     
 #     def _str_(self):  
 #         return f'{self.Nombre_Usuario} - {self.apellido_usuario} - {self.correo}'
-
-
-
-
 
 
 

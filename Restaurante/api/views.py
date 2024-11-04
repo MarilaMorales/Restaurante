@@ -1,9 +1,10 @@
 from rest_framework import generics
+from django.db.models import Count
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from .serializers import RegistroSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.db.models import Count
 from .models import Categorias, Administrador, Menu, Usuario, Orden, Detalles_orden, Menu_Dia, Resena
 from. models import Pago, Empleado, Producto, Proveedor, Promociones, Administrador, Direccion, Restaurante
 from .serializers import CategoriaSerializer, AdministradorSerializer, MenuSerializer,UsuarioSerializer
@@ -18,7 +19,7 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import RegistroSerializer 
-# from .middleware import admin_middleware
+
 
 
 
@@ -48,9 +49,6 @@ class Menu_DiaDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Menu_Dia.objects.all()
     serializer_class = Menu_DiaSerializer
     permission_classes = [AllowAny]
-
-    
-    
 
 # Pago
 class PagoListCreate(generics.ListCreateAPIView):
@@ -136,8 +134,6 @@ class AdministradorDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Administrador.objects.all()
     serializer_class = AdministradorSerializer
     permission_classes = [AllowAny]
-
-
 
 
 
@@ -238,10 +234,6 @@ class LoginView(generics.GenericAPIView):
 
 ##### Usuario Consulta
 
-# class UsuarioListDes(generics.ListAPIView):
-#     queryset = Usuario.objects.all()
-#     Usuario_ordenados_desc = Usuario.objects.filter().order_by('-Nombre_Usuario')
-#     serializer_class = UsuarioSerializer
 
 class UsuarioListDes(generics.ListAPIView):
     queryset = Usuario.objects.all()
@@ -272,11 +264,6 @@ class OrdenDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrdenSerializer
     permission_classes = [AllowAny]
 
-
-
-
- 
-
 # Menu
 
 class MenuListCreate(generics.ListCreateAPIView):
@@ -290,6 +277,25 @@ class MenuDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuSerializer
     permission_classes = [AllowAny]
  
+ 
+ ## consulta menu mas vendido 
+ 
+# class MenuMasVendidos(generics.ListAPIView):
+#     serializer_class = MenuSerializer
+#     def get_queryset(self):
+#         return Menu.objects.annotate(vendido_count=Count('detalles_orden__orden')).order_by('-vendido_count')[:3]
+ 
+class MenuMasVendidos(generics.ListAPIView):
+    serializer_class = MenuSerializer
+
+    def get_queryset(self):
+        return (
+            Menu.objects
+            .annotate(vendido_count=Count('orden__detalles_orden'))
+            .order_by('-vendido_count')[:3]
+        )
+ 
+ 
         
 
 # Detalles_Orden
@@ -298,6 +304,7 @@ class Detalles_ordenListCreate(generics.ListCreateAPIView):
     queryset = Detalles_orden.objects.all()
     serializer_class = Detalles_ordenSerializer
     permission_classes = [AllowAny]
+
 
 class Detalles_ordenDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Orden.objects.all()
