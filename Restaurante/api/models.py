@@ -101,9 +101,10 @@ class Restaurante (models.Model):
 
 class Usuario(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    rol = models.CharField(max_length=20, choices=[('admin', 'Administrador'), ('user', 'Usuario')], default='user')
     
     def __str__(self):  
-        return f'{self.usuario}'
+        return f'{self.usuario}- {self.rol}'
 
 
 

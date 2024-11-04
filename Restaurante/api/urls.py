@@ -49,6 +49,7 @@ urlpatterns = [
     
     path('menu/', views.MenuListCreate.as_view(), name='Menu-list'),
     path('menu/<int:pk>/', views.MenuDetail.as_view(), name='Menu-detail'),
+    path('menus-mas-vendidos/',views.MenuMasVendidos.as_view(), name='menus_mas_vendidos'),
 
     path('detalles_orden/', views.Detalles_ordenListCreate.as_view(), name='Detalles_orden-list'),
     path('detalles_orden/<int:pk>/', views.Detalles_ordenDetail.as_view(), name='Detalles_orden-detail'),

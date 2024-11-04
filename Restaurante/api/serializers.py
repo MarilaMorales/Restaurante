@@ -79,6 +79,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
     #     # Asigna un rol por defecto si no se proporciona
     #     validated_data['rol'] = validated_data.get('rol', 'user')
     #     return super().create(validated_data)
+    
 
               
     def validate_Nombre_Usuario (self, value):
@@ -110,19 +111,6 @@ class Detalles_ordenSerializer(serializers.ModelSerializer):
         model = Detalles_orden
         fields = '__all__'
 
-
-#codificacion de contraseña c 
-
-# class RegistroSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ("username", "password")
-
-#     def create(self, validated_data):
-#         usuario = User(**validated_data)
-#         usuario.set_password(validated_data['password'])  # Codifica la contraseña
-#         usuario.save()  # Guarda el usuario
-#         return usuario
 
 
 
